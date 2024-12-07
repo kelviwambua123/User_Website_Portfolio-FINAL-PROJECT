@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <title>My Projects</title>
+    <style>
+        body {
+            background-color: #e8f0fe;
+            font-family: 'Verdana', sans-serif;
+        }
+        .navbar {
+            background-color: #343a40;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+        .navbar-nav {
+            display: flex;
+            gap: 70px;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2rem; /* Increased font size */
+            font-weight: bold; /* Made text bold */
+        }
+        .navbar-nav .nav-link:hover {
+            color: #f0ad4e;
+        }
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+        h5 {
+            font-weight: bold;  /* Ensure the title is bold */
+            font-size: 1.2rem;  /* Reduce font size */
+            color: black;       /* Set font color to black */
+        }
+        .card {
+            border-radius: 15px;
+            transition: transform 0.5s, box-shadow 0.5s;
+            background-color: #ffffff;
+            color: #003366;
+            font-size: 1.15rem;
+            padding: 15px;
+            margin: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+        }
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .col-md-4 {
+            max-width: 350px;
+            width: 100%;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -15px;
+        }
+        footer {
+            background-color: #343a40; /* Dark background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto; /* Pushes the footer to the bottom */
+        }
+        footer a {
+            color: #f0ad4e; /* Light color for links */
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+        .footer-section {
+            padding: 10px 0;
+        }
+        .welcome-text {
+            color: #ffffff;
+            font-style: italic; /* Italicized welcome message */
+            margin-left: 20px; /* Added spacing */
+        }
+        .btn {
+            border-radius: 50px; /* Make buttons oval */
+            padding: 5px 15px; /* Adjusted padding for a more compact look */
+            font-size: 1rem; /* Set font size */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+            text-decoration: none; /* Remove underline */
+        }
+        .btn-info {
+            background-color: #17a2b8; /* Bootstrap info color */
+            color: white;
+        }
+        .btn-warning {
+            background-color: #ffc107; /* Bootstrap warning color */
+            color: white;
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Bootstrap danger color */
+            color: white;
+        }
+        .btn:hover {
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">My Projects</h1>
+        <nav class="navbar navbar-expand-lg">
+            <div class="navbar-nav">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{% url 'portfolio:project_create' %}">Add New Project</a>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </div>
+            <span class="welcome-text">Welcome, {{ user.username }}</span>
+        </nav>
+        <br>
+        <div class="row justify-content-center">
+            {% for project in projects %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'portfolio:project_detail' project.pk %}" class="btn btn-info">View</a>
+                                <a href="{% url 'portfolio:project_edit' project.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'portfolio:project_delete' project.pk %}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content" style="background-color: #343a40; color: white; padding: 20px; text-align: center;">
+            <h4>Your Portfolio Hub</h4>
+            <p>Welcome to your personal portfolio website, where you can effortlessly manage your projects. Showcase your work, keep track of your accomplishments, and make edits with ease. Our platform is designed to help you present your projects in a professional manner.</p>
+            
+            <div class="footer-links" style="margin: 10px 0;">
+                <a href="#">Support Center</a> |
+                <a href="#">User Feedback</a> |
+                <a href="#">Get in Touch</a>
+            </div>
+
+            <div class="footer-bottom" style="margin-top: 15px;">
+                <p>&copy; My Projects. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

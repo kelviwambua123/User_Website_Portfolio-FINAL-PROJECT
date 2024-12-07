@@ -1,0 +1,93 @@
+<!-- templates/portfolio/project_confirm_delete.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <title>Delete Project</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400;700&display=swap');
+
+        body {
+            background-color: #add8e6; /* Light blue background */
+            font-family: 'Futura', sans-serif; /* Use Futura font */
+        }
+
+        .container {
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center the content vertically */
+            transition: background-color 0.3s; /* Smooth transition for background color */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+            padding: 20px; /* Add padding to the container */
+            border-radius: 10px; /* Rounded corners for the container */
+            background-color: #ffffff; /* White background for the container */
+        }
+
+        .container:hover {
+            background-color: #b0e0e6; /* Change to a slightly darker light blue on hover */
+        }
+
+        .btn-danger {
+            border-radius: 50px; /* Make buttons oval */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+        }
+
+        .btn-danger:hover {
+            background-color: #c62828; /* Darker red for delete hover */
+            color: #fff;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .btn-secondary {
+            border-radius: 50px; /* Make buttons oval */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+        }
+
+        .btn-secondary:hover {
+            background-color: #5d6d7e; /* Darker gray for cancel hover */
+            color: #fff;
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background-color: #90ee90; /* Light green background for the column */
+        }
+
+        .card-title {
+            font-size: 2rem; /* Increase title font size */
+            font-weight: bold; /* Make title bold */
+        }
+
+        .card p {
+            font-size: 1.2rem; /* Increase font size for text */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <h2 class="card-title text-center text-danger">Delete Project</h2>
+                    <p class="text-center">Are you sure you want to delete <strong>"{{ project.title }}"</strong>?</p>
+                    <form method="POST" class="text-center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg me-2">Confirm Delete</button>
+                        <a href="{% url 'portfolio:project_list' %}" class="btn btn-secondary btn-lg">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

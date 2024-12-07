@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <title>{% if form.instance.pk %}Edit{% else %}New{% endif %} Project</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            background-color: #E0F2F1; 
+            font-family: 'Roboto', sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+        }
+
+        .container {
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px; /* Added padding for better spacing */
+        }
+
+        h1 {
+            font-size: 2.5rem; 
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px; /* Reduced margin */
+            font-weight: bold; 
+            color: #004d40;
+        }
+
+        h4 {
+            color: #555; 
+            font-weight: bold; /* Make welcome message bold */
+        }
+
+        form {
+            width: 100%;
+            max-width: 500px; 
+            padding: 20px;
+            background-color: #ffffff; 
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+            border: 2px solid #004d40; 
+            height: auto; /* Set height to auto */
+        }
+
+        button {
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            border: 2px solid #004d40; 
+        }
+
+        .btn-primary {
+            border-radius: 5px;
+            background-color: #00796b; 
+            color: white; 
+        }
+
+        .btn-primary:hover {
+            background-color: #004d40; 
+            color: white; 
+        }
+
+        .btn-secondary {
+            border-radius: 5px;
+            border: 2px solid #6c757d; 
+        }
+
+        .btn-secondary:hover {
+            background-color: #6c757d; 
+            color: white; 
+        }
+
+        input, select {
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border: 2px solid #004d40; 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: 95%; 
+        }
+
+        textarea {
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            border: 2px solid #004d40; 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: 95%; 
+            height: 100px; /* Reduced height for textarea */
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #00796b; 
+            box-shadow: 0 0 5px rgba(0, 121, 107, 0.5); 
+        }
+
+        .form-label {
+            font-weight: bold; /* Make label text bold */
+            color: black; /* Label color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">{% if form.instance.pk %}Edit{% else %}Add New{% endif %} Project</h1>
+        <h4>Welcome, {{ user.username }}</h4>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between mt-3">
+                <button type="submit" class="btn btn-primary w-45">Save</button>
+                <a href="{% url 'portfolio:project_list' %}" class="btn btn-secondary w-45">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
