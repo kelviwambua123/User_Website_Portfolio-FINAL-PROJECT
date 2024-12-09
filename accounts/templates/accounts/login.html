@@ -8,25 +8,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: lightblue; /* Background color of the page */
+            background-color: #90ee90; /* Light green background */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh; /* Full viewport height */
             margin: 0;
+            font-family: 'Arial', sans-serif; /* Changed font for better readability */
         }
         .login-container {
-            background-color: lightgreen; /* Background color of the form */
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s; /* Smooth transition */
+            background-color: #ffffff; /* White background for the form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            width: 100%;
+            max-width: 400px; /* Limit the width for better layout */
         }
         .login-container:hover {
-            background-color: #a8e6cf; /* Change on hover */
+            background-color: #e0f7fa; /* Soft color change on hover */
         }
         h1 {
             text-align: center;
+            color: #333333; /* Darker color for the heading */
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold; /* Bold labels for better visibility */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Bootstrap primary color */
+            border: none; /* Remove border */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+        .text-center a {
+            color: #007bff; /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+        .text-center a:hover {
+            text-decoration: underline; /* Underline on hover */
         }
     </style>
 </head>
